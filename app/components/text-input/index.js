@@ -7,13 +7,13 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import style from "./style";
 
-export const TextInput = ({
+export default function TextInput({
   icon,
   isPassword,
   placeholder,
   value,
   setValue,
-}) => {
+}) {
   const [visible, setVisible] = useState(false);
   const [isFocused, setİsFocused] = useState(false);
   const chanceVisible = () => {
@@ -52,4 +52,4 @@ export const TextInput = ({
       )}
     </View>
   );
-};
+}

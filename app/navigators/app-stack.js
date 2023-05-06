@@ -1,12 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AuthStack, HomeStack } from "./";
 import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
-export const AppStack = () => {
-  const isLoggedIn = false;
+export default function AppStack() {
+  const { isLoggedIn } = useSelector((state) => state?.auth);
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -18,4 +19,4 @@ export const AppStack = () => {
       </Stack.Navigator>
     </NavigationContainer>
   );
-};
+}

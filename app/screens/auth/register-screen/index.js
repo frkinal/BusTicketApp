@@ -5,6 +5,7 @@ import {
   ScrollView,
   Modal,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 
 import style from "./style";
@@ -12,8 +13,9 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import { Button, TextInput } from "../../../components";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const RegisterScreen = () => {
+export default function RegisterScreen() {
   const navigation = useNavigation();
 
   const [name, setName] = useState("");
@@ -23,7 +25,6 @@ export const RegisterScreen = () => {
   const [rePassword, setRePassword] = useState("");
   const [identity, setIdentity] = useState("");
   const [selectedGender, setSelectedGender] = useState();
-  const [gender, setGender] = useState("");
   const [date, setDate] = useState(new Date());
   const [modalVisible, setModalVisible] = useState(false);
   const [secondModalVisible, setSecondModalVisible] = useState(false);
@@ -39,7 +40,91 @@ export const RegisterScreen = () => {
     setSecondModalVisible(!secondModalVisible);
 
   const login = () => navigation.goBack();
-  const register = () => {};
+
+  const register = async () => {
+    if (name.length === 0) {
+      Alert.alert("Hata", "Ad alanı zorunludur!");
+      return;
+    }
+    if (surname.length === 0) {
+      Alert.alert("Hata", "Soyad alanı zorunludur!");
+      return;
+    }
+    if (mail.length === 0) {
+      Alert.alert("Hata", "E-mail alanı zorunludur!");
+      return;
+    }
+    if (password.length === 0) {
+      Alert.alert("Hata", "Şifre alanı zorunludur!");
+      return;
+    }
+    if (rePassword.length === 0) {
+      Alert.alert("Hata", "Tekrar şifre alanı zorunludur!");
+      return;
+    }
+    if (identity.length === 0) {
+      Alert.alert("Hata", "Kimlik no alanı zorunludur!");
+      return;
+    }
+    if (date.length === 0) {
+      Alert.alert("Hata", "Doğum tarihi alanı zorunludur!");
+      return;
+    }
+    if (selectedGender.length === 0) {
+      Alert.alert("Hata", "Cinsiyet alanı zorunludur!");
+      return;
+    }
+    if (password !== rePassword) {
+      Alert.alert("Hata", "Şifreler uyuşmuyor!");
+      return;
+    }
+    try {
+      var keys = await AsyncStorage.getAllKeys();
+    } catch (error) {
+      console.log(error);
+    }
+    const haveKey = keys.find((item) => item === `@${identity}`);
+    if (haveKey) {
+      Alert.alert("Hata", "Bu kimlik numarasıyla zaten bir hesap var!");
+      return;
+    }
+    keys.map(async (item, index) => {
+      await AsyncStorage.getItem(item).then((session) => {
+        if (session !== null) {
+          if (mail === JSON.parse(session).mail) {
+            Alert.alert("Hata", "Bu E-mail adresiyle zaten bir hesap var!");
+            return;
+          }
+        }
+      });
+    });
+    const data = JSON.stringify({
+      name,
+      surname,
+      mail,
+      password,
+      identity,
+      selectedGender,
+      date,
+    });
+    try {
+      await AsyncStorage.setItem(`@${identity}`, data);
+      Alert.alert(
+        "Bilgilendirme",
+        "Hesabınız başarıyla oluşturuldu. Giriş yap sayfasına yönlendirilmek için Tamam'a basınız.",
+        [
+          {
+            text: "Tamam",
+            onPress: () => {
+              navigation.goBack();
+            },
+          },
+        ]
+      );
+    } catch (error) {
+      Alert.alert("Hata", "Bir şeyler ters gitti...");
+    }
+  };
 
   return (
     <ScrollView style={style.container}>
@@ -120,6 +205,7 @@ export const RegisterScreen = () => {
                   selectedValue={selectedGender}
                   onValueChange={(itemValue, itemIndex) => {
                     setSelectedGender(itemValue);
+                    setSecondModalVisible(false);
                   }}
                 >
                   <Picker.Item label="Erkek" value="Erkek" />
@@ -132,4 +218,4 @@ export const RegisterScreen = () => {
       </Modal>
     </ScrollView>
   );
-};
+}

@@ -3,10 +3,10 @@ import { View, Text } from "react-native";
 
 import style from "./style";
 
-export const HomeScreen = () => {
+export default function HomeScreen() {
   return (
     <View style={style.container}>
       <Text>HomeScreen</Text>
     </View>
   );
-};
+}

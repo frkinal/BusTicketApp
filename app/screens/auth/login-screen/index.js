@@ -4,13 +4,40 @@ import { View, Text, ScrollView } from "react-native";
 import style from "./style";
 import { Button, TextInput } from "../../../components";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch, useSelector } from "react-redux";
+import { changeAuhtentication } from "../../../redux/auth-slice";
 
-export const LoginScreen = () => {
+export default function LoginScreen() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-  const login = () => {};
+  const login = async () => {
+    try {
+      var keys = await AsyncStorage.getAllKeys();
+      keys.map(async (item, index) => {
+        await AsyncStorage.getItem(item).then(async (session) => {
+          if (session !== null) {
+            if (mail !== JSON.parse(session).mail) {
+              Alert.alert("Hata", "Bu E-mail adresiyle bir hesap yok!");
+              return;
+            } else {
+              if (password !== JSON.parse(session).password) {
+                Alert.alert("Hata", "Yanlış şifre girdiniz");
+                return;
+              } else {
+                dispatch(changeAuhtentication());
+              }
+            }
+          }
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const register = () => navigation.navigate("register-screen");
   return (
     <ScrollView style={style.container}>
@@ -39,4 +66,4 @@ export const LoginScreen = () => {
       </View>
     </ScrollView>
   );
-};
+}
