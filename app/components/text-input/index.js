@@ -35,6 +35,7 @@ export default function TextInput({
         onBlur={() => setİsFocused(false)}
         placeholder={placeholder}
         placeholderTextColor="black"
+        selectionColor="red"
         autoCapitalize="none"
         value={value}
         onChangeText={setValue}

@@ -5,6 +5,7 @@ import {
   Modal,
   TouchableWithoutFeedback,
   Alert,
+  Platform,
 } from "react-native";
 
 import style from "./style";
@@ -145,11 +146,27 @@ export default function RegisterScreen() {
           onpress={changeModalVisible}
           preset="picker"
         />
-        <Button
-          text={selectedGender ? selectedGender : "Cinsiyet"}
-          onpress={changeSecondModalVisible}
-          preset="picker"
-        />
+        {Platform.OS === "android" ? (
+          <Picker
+            style={style.picker}
+            mode="dropdown"
+            dropdownIconColor="#f6f6f6"
+            selectedValue={selectedGender}
+            onValueChange={(itemValue, itemIndex) => {
+              setSelectedGender(itemValue);
+              setSecondModalVisible(false);
+            }}
+          >
+            <Picker.Item label="Erkek" value="Erkek" />
+            <Picker.Item label="Kadin" value="Kadin" />
+          </Picker>
+        ) : (
+          <Button
+            text={selectedGender ? selectedGender : "Cinsiyet"}
+            onpress={changeSecondModalVisible}
+            preset="picker"
+          />
+        )}
 
         <TextInput value={mail} setValue={setMail} placeholder="E-Mail" />
         <TextInput
@@ -198,6 +215,7 @@ export default function RegisterScreen() {
               <View style={style.inner_second_modal_container}>
                 <Picker
                   mode="dropdown"
+                  dropdownIconColor="white"
                   selectedValue={selectedGender}
                   onValueChange={(itemValue, itemIndex) => {
                     setSelectedGender(itemValue);

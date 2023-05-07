@@ -10,13 +10,12 @@ export default StyleSheet.create({
     width: "100%",
     alignSelf: "center",
   },
-
   input: {
     minHeight: 50,
     flex: 1,
     paddingLeft: 10,
     backgroundColor: "#f6f6f6",
-    color: "white",
+    color: "black",
     maxHeight: 100,
     borderRadius: 10,
   },

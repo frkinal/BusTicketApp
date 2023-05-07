@@ -33,4 +33,15 @@ export default StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
   },
+  picker: {
+    flex: 1,
+    width: "100%",
+    height: 50,
+    paddingLeft: 10,
+    backgroundColor: "#f6f6f6",
+    color: "black",
+    borderRadius: 10,
+    alignItems: "flex-start",
+    marginVertical: 5,
+  },
 });

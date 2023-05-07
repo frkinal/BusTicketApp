@@ -37,11 +37,22 @@ export default StyleSheet.create({
   picker_container: {
     width: "100%",
   },
-  picker: {
+  inner_picker_container: {
     width: "100%",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  picker: {
+    flex: 1,
+    width: "100%",
+    height: 50,
+    paddingLeft: 10,
+    backgroundColor: "#f6f6f6",
+    color: "black",
+    borderRadius: 10,
+    alignItems: "flex-start",
+    marginVertical: 5,
   },
   picker_text: {
     width: "25%",
@@ -61,5 +72,18 @@ export default StyleSheet.create({
     width: "35%",
     alignSelf: "flex-end",
     marginVertical: "5%",
+  },
+  calendar_modal_container: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.2)",
+    justifyContent: "flex-end",
+  },
+  inner_calendar_modal_container: {
+    width: "100%",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    borderColor: "white",
+    backgroundColor: "gray",
+    paddingVertical: "2%",
   },
 });
