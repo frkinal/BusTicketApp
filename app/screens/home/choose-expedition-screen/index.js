@@ -3,10 +3,10 @@ import { View, Text } from "react-native";
 
 import style from "./style";
 
-export default function HomeScreen() {
+export default function ChooseExpeditionScreen() {
   return (
     <View style={style.container}>
-      <Text>HomeScreen</Text>
+      <Text>ChooseExpeditionScreen</Text>
     </View>
   );
 }
