@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
-  Text,
   ScrollView,
   Modal,
   TouchableWithoutFeedback,
@@ -11,7 +10,7 @@ import {
 import style from "./style";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
-import { Button, TextInput } from "../../../components";
+import { Button, Logo, TextInput } from "../../../components";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -128,10 +127,7 @@ export default function RegisterScreen() {
 
   return (
     <ScrollView style={style.container}>
-      <View style={style.logo_container}>
-        <Text children="Gel Al" style={style.logo_text} />
-        <Text children="Bilet" style={style.logo_sec_text} />
-      </View>
+      <Logo />
       <View style={style.form_container}>
         <TextInput value={name} setValue={setName} placeholder="Ad" />
         <TextInput value={surname} setValue={setSurname} placeholder="Soyad" />

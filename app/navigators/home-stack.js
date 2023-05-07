@@ -11,7 +11,7 @@ import {
 const Stack = createNativeStackNavigator();
 export default function HomeStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator>
       <Stack.Screen
         name="search-ticket-screen"
         component={SearchTicketScreen}

@@ -5,25 +5,6 @@ export default StyleSheet.create({
     flexGrow: 1,
     backgroundColor: "white",
   },
-  logo_container: {
-    width: 100,
-    height: 100,
-    borderRadius: 20,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "red",
-    marginTop: "5%",
-  },
-  logo_text: {
-    fontSize: 15,
-    color: "white",
-  },
-  logo_sec_text: {
-    fontSize: 18,
-    color: "white",
-    fontWeight: "bold",
-  },
   form_container: {
     flex: 1,
     width: "90%",

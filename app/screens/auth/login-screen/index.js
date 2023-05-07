@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 
 import style from "./style";
-import { Button, TextInput } from "../../../components";
+import { Button, Logo, TextInput } from "../../../components";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,10 +41,7 @@ export default function LoginScreen() {
   const register = () => navigation.navigate("register-screen");
   return (
     <ScrollView style={style.container}>
-      <View style={style.logo_container}>
-        <Text children="Gel Al" style={style.logo_text} />
-        <Text children="Bilet" style={style.logo_sec_text} />
-      </View>
+      <Logo />
       <View style={style.form_container}>
         <TextInput
           icon="mail"
