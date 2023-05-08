@@ -11,7 +11,7 @@ import {
 const Stack = createNativeStackNavigator();
 export default function HomeStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="search-ticket-screen">
       <Stack.Screen
         name="search-ticket-screen"
         component={SearchTicketScreen}

@@ -13,6 +13,8 @@ export default function TextInput({
   placeholder,
   value,
   setValue,
+  maxLength,
+  keyboardType,
 }) {
   const [visible, setVisible] = useState(false);
   const [isFocused, setİsFocused] = useState(false);
@@ -39,6 +41,8 @@ export default function TextInput({
         autoCapitalize="none"
         value={value}
         onChangeText={setValue}
+        maxLength={maxLength}
+        keyboardType={keyboardType}
       />
       {isPassword && (
         <TouchableWithoutFeedback onPress={chanceVisible}>
